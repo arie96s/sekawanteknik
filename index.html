@@ -3,568 +3,478 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sekawan Teknik - Professional Service</title>
+    <title>Sekawan Teknik | Solusi Teknik Profesional Pekanbaru</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    
     <style>
-        /* --- RESET & FONTS --- */
+        :root {
+            --bg-dark: #0a0a0b; 
+            --accent-color: #c5a059; 
+            --accent-glow: rgba(197, 160, 89, 0.15);
+            --glass-white: rgba(255, 255, 255, 0.03);
+            --text-main: #f8f9fa;
+            --text-muted: #94a3b8;
+            --font-heading: 'Montserrat', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Helvetica', 'Arial', sans-serif;
-        }
-
-        :root {
-            --bg-dark: #050505;
-            --glass-black: rgba(0, 0, 0, 0.6);
-            --glass-white: rgba(255, 255, 255, 0.95);
-            --border-glass: rgba(255, 255, 255, 0.15);
-            --text-white: #ffffff;
-            --text-black: #1a1a1a;
-            --text-grey: #cccccc;
+            font-family: var(--font-body);
         }
 
         body {
             background-color: var(--bg-dark);
-            background-image: 
-                radial-gradient(at 0% 0%, hsla(0,0%,15%,1) 0, transparent 50%), 
-                radial-gradient(at 100% 100%, hsla(0,0%,10%,1) 0, transparent 50%);
-            color: var(--text-white);
-            min-height: 100vh;
+            color: var(--text-main);
+            line-height: 1.8;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* --- HEADER --- */
+        /* --- NAVIGASI --- */
         header {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            padding: 10px 20px;
+            padding: 30px 8%;
             position: fixed;
             width: 100%;
             top: 0;
-            left: 0;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(10px);
-            z-index: 100;
-            transition: all 0.4s ease;
-            border-bottom: 1px solid var(--border-glass);
+            z-index: 1000;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            background: transparent;
         }
 
         header.scrolled {
-            background: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            padding: 8px 20px;
-        }
-
-        .menu-btn {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 24px;
-            cursor: pointer;
-            color: white;
-            background: none;
-            border: none;
-            transition: color 0.3s ease;
-            z-index: 110;
-        }
-
-        header.scrolled .menu-btn {
-            color: black;
-        }
-
-        /* --- LOGO FADE SYSTEM --- */
-        .logo-container {
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-            height: 60px; /* Menjaga konsistensi tinggi saat transisi */
-            justify-content: center;
+            background: rgba(10, 10, 11, 0.85);
+            padding: 18px 8%;
+            backdrop-filter: blur(25px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .logo-container img {
-            height: 45px;
-            transition: opacity 0.5s ease;
-            position: absolute; /* Membuat logo bertumpuk untuk efek fade */
-            top: 0;
+            height: 38px;
+            filter: brightness(1.1);
+            transition: 0.3s;
         }
 
-        /* Logo Putih (Awal) */
-        .logo-white {
-            opacity: 1;
-            position: relative !important; /* Mendorong address bar di bawahnya */
-        }
-
-        /* Logo Gelap (Saat Scroll) */
-        .logo-dark {
-            opacity: 0;
-        }
-
-        header.scrolled .logo-white {
-            opacity: 0;
-        }
-
-        header.scrolled .logo-dark {
-            opacity: 1;
-        }
-
-        .address-bar {
-            margin-top: 5px;
-            font-size: 8px;
-            color: rgba(255, 255, 255, 0.8);
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            letter-spacing: 0.5px;
-            transition: color 0.3s ease;
-            position: relative;
-            z-index: 5;
-        }
-
-        header.scrolled .address-bar {
-            color: rgba(0, 0, 0, 0.7);
-        }
-
-        /* --- SIDEBAR MENU (Tetap Sama) --- */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: -320px;
-            width: 300px;
-            height: 100%;
-            background: #000000;
-            border-right: 1px solid #333;
-            transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 999;
-            padding: 80px 20px 20px 20px;
-            overflow-y: auto;
-            box-shadow: 10px 0 30px rgba(0,0,0,0.8);
-        }
-
-        .sidebar.active {
-            left: 0;
-        }
-
-        .sidebar h2 {
-            color: white;
-            margin-bottom: 25px;
-            font-size: 1rem;
+        .menu-btn {
+            background: transparent;
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+            padding: 10px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            transition: all 0.4s ease;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            border-bottom: 1px solid #333;
-            padding-bottom: 10px;
-            font-weight: 300;
         }
 
-        .service-list {
-            list-style: none;
+        .menu-btn:hover {
+            background: var(--accent-color);
+            color: #000;
+            box-shadow: 0 10px 20px var(--accent-glow);
         }
 
-        .service-list li {
-            padding: 15px 0;
-            border-bottom: 1px solid #222;
-            color: #888;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-
-        .service-list li:hover {
-            color: white;
-            padding-left: 10px;
-        }
-
-        .close-sidebar {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 24px;
-            cursor: pointer;
-            color: white;
-        }
-
-        /* --- CONTENT & MODALS (Tetap Sama) --- */
-        .container {
-            max-width: 1200px;
-            margin: 140px auto 40px auto;
-            padding: 0 20px;
-        }
-
-        .hero-text {
+        /* --- HERO --- */
+        .hero {
+            padding: 240px 8% 120px;
             text-align: center;
-            margin-bottom: 50px;
+            background: radial-gradient(circle at 50% -10%, rgba(197, 160, 89, 0.12), transparent 60%);
         }
 
-        .hero-text h1 {
-            font-size: 2.2rem;
-            margin-bottom: 10px;
+        .hero h1 {
+            font-family: var(--font-heading);
+            font-size: clamp(2.8rem, 7vw, 4.5rem);
+            font-weight: 800;
+            letter-spacing: -2px;
+            line-height: 1.05;
+            margin-bottom: 30px;
+            background: linear-gradient(180deg, #fff 40%, var(--accent-color) 150%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 50px;
+            font-size: 1.15rem;
             font-weight: 300;
-            letter-spacing: 1px;
-            color: white;
+            letter-spacing: 0.2px;
         }
 
-        .hero-text p {
-            color: #888;
-            font-size: 0.9rem;
+        /* --- GALERI --- */
+        .gallery-section {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto 140px;
+            position: relative;
         }
+
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: 0.75rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: var(--accent-color);
+            margin-bottom: 50px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .gallery-container {
+            position: relative;
+            height: 600px;
+            overflow: hidden;
+            border-radius: 40px;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.6);
+        }
+
+        .gallery-slide {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0;
+            transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1), transform 2s ease;
+            background-size: cover;
+            background-position: center;
+            transform: scale(1.15);
+        }
+
+        /* Efek Overlay Gelap di bawah gambar agar lebih sinematik */
+        .gallery-slide::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 40%;
+            background: linear-gradient(to top, rgba(10,10,11,0.8), transparent);
+        }
+
+        .gallery-slide.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .gallery-nav {
+            position: absolute;
+            top: 50%; width: 100%;
+            display: flex; justify-content: space-between;
+            padding: 0 40px; transform: translateY(-50%);
+            z-index: 10;
+        }
+
+        .nav-btn {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(15px);
+            color: white;
+            border: none;
+            width: 55px; height: 55px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.4s;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .nav-btn:hover { background: var(--accent-color); color: #000; transform: scale(1.1); }
+
+        /* --- TIPS & GRID --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 5% 140px; }
 
         .infographic-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
+            gap: 30px;
         }
 
         .info-card {
-            background: var(--glass-black);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--border-glass);
-            padding: 30px;
-            border-radius: 12px;
-            text-align: center;
+            background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+            padding: 50px 40px;
+            border-radius: 35px;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             cursor: pointer;
-            transition: transform 0.3s, background 0.3s;
+            text-align: center;
             position: relative;
-            overflow: hidden;
         }
 
+        /* Efek glow halus saat hover sebagai ganti stroke */
         .info-card:hover {
-            transform: translateY(-5px);
-            background: rgba(20, 20, 20, 0.8);
-            border-color: rgba(255,255,255,0.3);
+            background: rgba(197, 160, 89, 0.04);
+            transform: translateY(-15px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4), 0 0 20px var(--accent-glow);
         }
 
-        .info-icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            display: block;
+        .info-icon { 
+            font-size: 2.8rem; 
+            margin-bottom: 30px; 
+            display: block; 
+            filter: drop-shadow(0 10px 10px rgba(0,0,0,0.3));
         }
 
-        .info-card h3 {
-            font-weight: 400;
-            margin-bottom: 10px;
-            font-size: 1.1rem;
-            color: white;
+        .pagination { display: flex; justify-content: center; gap: 15px; margin-top: 70px; }
+
+        .page-box {
+            width: 48px; height: 48px;
+            border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: 0.4s;
+            background: var(--glass-white);
+            color: var(--text-muted);
+            font-weight: 600;
         }
 
-        .info-card p {
-            font-size: 0.85rem;
-            line-height: 1.6;
-            color: #aaa;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
+        .page-box.active {
+            background: var(--accent-color);
+            color: #000;
+            box-shadow: 0 10px 20px var(--accent-glow);
         }
 
-        .click-hint {
-            margin-top: 15px;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            opacity: 0.5;
-        }
-
-        .modal-overlay {
+        /* --- POP-UP MEWAH --- */
+        .tip-modal {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            display: flex;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(5, 5, 5, 0.97);
+            z-index: 4000;
+            display: none;
             justify-content: center;
             align-items: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s;
-            z-index: 2000;
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .booking-box {
-            background: #111;
-            padding: 40px;
-            border-radius: 20px;
-            border: 1px solid #333;
-            text-align: center;
-            max-width: 400px;
-            width: 90%;
-            transform: scale(0.8);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .modal-overlay.active .booking-box {
-            transform: scale(1);
-        }
-
-        .booking-box h3 {
-            font-size: 1.3rem;
-            margin-bottom: 30px;
-            color: white;
-            font-weight: 300;
-        }
-
-        .btn {
-            padding: 10px 35px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 0.9rem;
-            text-decoration: none;
-            display: inline-block;
-            margin: 0 10px;
-            font-family: 'Helvetica', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .btn-yes {
-            background: white;
-            color: black;
-            border: 1px solid white;
-        }
-
-        .btn-yes:hover {
-            background: black;
-            color: white;
-        }
-
-        .btn-no {
-            background: transparent;
-            color: #888;
-            border: 1px solid #333;
-        }
-
-        .btn-no:hover {
-            border-color: white;
-            color: white;
-        }
-
-        .tip-detail-box {
-            background: #1a1a1a;
-            padding: 0;
-            border-radius: 15px;
-            max-width: 500px;
-            width: 90%;
-            transform: scale(0);
-            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            overflow: hidden;
-            border: 1px solid #333;
-            position: relative;
-        }
-
-        .modal-overlay.active .tip-detail-box {
-            transform: scale(1);
-        }
-
-        .tip-illustration {
-            height: 200px;
-            background: #222;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 5rem;
+            backdrop-filter: blur(20px);
         }
 
         .tip-content {
-            padding: 30px;
-            text-align: left;
+            background: #111;
+            max-width: 550px;
+            width: 90%;
+            padding: 70px 50px;
+            border-radius: 50px;
+            text-align: center;
+            position: relative;
+            transform: scale(0.8);
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
         }
 
-        .tip-content h2 {
-            margin-bottom: 15px;
-            font-weight: 300;
-            color: white;
-        }
+        .tip-modal.active { display: flex; }
+        .tip-modal.active .tip-content { transform: scale(1); opacity: 1; }
 
-        .tip-content p {
+        /* --- SIDEBAR --- */
+        .sidebar {
+            position: fixed; top: 0; right: -100%; width: 380px; height: 100%;
+            background: rgba(10, 10, 11, 0.98); 
+            z-index: 2000; padding: 100px 50px;
+            transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            backdrop-filter: blur(30px);
+        }
+        .sidebar.active { right: 0; }
+        .service-list li { 
+            list-style: none; 
+            padding: 22px 0; 
+            border-bottom: 1px solid rgba(255,255,255,0.03); 
+            cursor: pointer; 
+            transition: 0.4s; 
             color: #ccc;
-            line-height: 1.6;
-            font-size: 0.95rem;
+            font-size: 1.1rem;
         }
+        .service-list li:hover { color: var(--accent-color); transform: translateX(15px); }
 
-        .close-tip {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(0,0,0,0.5);
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 30px;
-            cursor: pointer;
-            font-weight: bold;
+        /* --- BOOKING MODAL --- */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; z-index: 3000; transition: 0.5s; backdrop-filter: blur(10px); }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        .booking-box { background: #111; padding: 70px 50px; border-radius: 45px; max-width: 550px; text-align: center; box-shadow: 0 40px 80px rgba(0,0,0,0.5); }
+
+        .btn-yes { 
+            background: var(--accent-color); 
+            color: #000; 
+            padding: 18px 45px; 
+            border-radius: 50px; 
+            text-decoration: none; 
+            font-weight: 700; 
+            display: inline-block; 
+            cursor:pointer; 
+            border:none; 
+            transition: 0.4s; 
+            letter-spacing: 1px;
+            font-size: 0.9rem;
         }
+        .btn-yes:hover { transform: translateY(-5px); box-shadow: 0 15px 35px var(--accent-glow); }
 
-        footer {
-            margin-top: 80px;
-            padding: 30px;
-            text-align: center;
-            border-top: 1px solid #222;
-            color: #555;
-            font-size: 0.8rem;
+        footer { padding: 100px 5% 60px; background: #050505; text-align: center; border-top: 1px solid rgba(255,255,255,0.02); }
+        .footer-address { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 40px; line-height: 2; }
+
+        /* --- ANIMASI HALUS --- */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
-        footer span {
-            color: #fff;
+        .hero, .gallery-section, .info-card {
+            animation: fadeInUp 1.2s ease-out both;
         }
     </style>
 </head>
 <body>
 
     <header id="mainHeader">
-        <button class="menu-btn" id="menuToggle">☰</button>
         <div class="logo-container">
-            <img src="Logo - RGB (1).png" alt="Logo White" class="logo-white">
-            <img src="Logo - RGB (2).png" alt="Logo Dark" class="logo-dark">
-            
-            <div class="address-bar">
-                <span>📍</span> Jl. Damai, No. 16 E, Panam, Kota Pekanbaru, Riau
-            </div>
+            <img src="Logo - RGB (1).png" alt="Sekawan Teknik" class="logo-white">
         </div>
+        <button class="menu-btn" id="menuToggle">Layanan Kami</button>
     </header>
 
-    <div class="sidebar" id="sidebar">
-        <span class="close-sidebar" id="closeSidebar">&times;</span>
-        <h2>Menu Layanan</h2>
-        <ul class="service-list">
-            <li onclick="triggerBooking('Service AC & Bongkar Pasang')">Service AC, Bongkar Pasang</li>
-            <li onclick="triggerBooking('Instalasi Listrik & CCTV')">Instalasi Listrik & CCTV</li>
-            <li onclick="triggerBooking('Perbaikan Elektronik Rumah')">Perbaikan Kulkas, Mesin Cuci</li>
-            <li onclick="triggerBooking('Perbaikan Kipas & Exhaust')">Kipas Angin, Exhaust Fan</li>
-            <li onclick="triggerBooking('Pembersihan Tangki Air')">Pembersihan Tangki, Pipa</li>
-            <li onclick="triggerBooking('Interior Gypsum & Plafon')">Partisi Gypsum, Plafon</li>
-        </ul>
+    <section class="hero">
+        <h1>Maintenance &<br>Engineering</h1>
+        <p>Menghadirkan standar teknik presisi untuk hunian dan bisnis Anda di Pekanbaru. Solusi jangka panjang dengan hasil yang tak tertandingi.</p>
+    </section>
+
+    <div class="gallery-section">
+        <h2 class="section-title">Portofolio Eksklusif</h2>
+        <div class="gallery-container" id="gallery">
+            <div class="gallery-slide active" style="background-image: url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1200')"></div>
+            <div class="gallery-slide" style="background-image: url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1200')"></div>
+            <div class="gallery-slide" style="background-image: url('https://images.unsplash.com/photo-1558389186-438424b00a32?auto=format&fit=crop&w=1200')"></div>
+            <div class="gallery-slide" style="background-image: url('https://images.unsplash.com/photo-1590348697103-43114555ec8f?auto=format&fit=crop&w=1200')"></div>
+            <div class="gallery-slide" style="background-image: url('https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=1200')"></div>
+            
+            <div class="gallery-nav">
+                <button class="nav-btn" onclick="prevSlide()">&#10094;</button>
+                <button class="nav-btn" onclick="nextSlide()">&#10095;</button>
+            </div>
+        </div>
     </div>
 
     <div class="container">
-        <div class="hero-text">
-            <h1>Tips Buat Kamu</h1>
-            <p>Booking Layanan? Tap Menu Kiri Atas.</p>
-        </div>
-
+        <h2 class="section-title">Knowledge Center</h2>
         <div class="infographic-grid" id="tipsGrid"></div>
+        <div class="pagination" id="tipPagination"></div>
     </div>
+
+    <div class="tip-modal" id="tipModal">
+        <div class="tip-content">
+            <span class="tip-illustration" id="tipPopIcon">🛠️</span>
+            <h3 id="tipPopTitle" style="margin-bottom:25px; font-family:var(--font-heading); color:var(--accent-color); font-size: 2rem; font-weight: 700;">Judul Tips</h3>
+            <div id="tipPopDesc"></div>
+            <button class="btn-yes" onclick="closeTipModal()" style="margin-top:35px; font-size: 0.75rem;">KEMBALI KE BERANDA</button>
+        </div>
+    </div>
+
+    <aside class="sidebar" id="sidebar">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 60px;">
+            <h2 style="font-family: var(--font-heading); font-size: 0.8rem; letter-spacing: 3px; color: var(--accent-color);">LAYANAN KAMI</h2>
+            <span id="closeSidebar" style="cursor: pointer; font-size: 2rem; color: #fff;">&times;</span>
+        </div>
+        <ul class="service-list">
+            <li onclick="triggerBooking('Servis AC & Instalasi')">Servis AC & Pemasangan</li>
+            <li onclick="triggerBooking('Sistem Kelistrikan & CCTV')">Kelistrikan & CCTV</li>
+            <li onclick="triggerBooking('Perbaikan Perangkat Rumah')">Perbaikan Elektronik</li>
+            <li onclick="triggerBooking('Solusi Ventilasi Udara')">Ventilasi & Exhaust</li>
+            <li onclick="triggerBooking('Perawatan Tangki Air')">Kuras Tangki Air</li>
+            <li onclick="triggerBooking('Plafon & Interior')">Gypsum & Interior</li>
+        </ul>
+    </aside>
 
     <div class="modal-overlay" id="bookingModal">
         <div class="booking-box">
-            <h3>Apakah kamu ingin Booking Layanan?</h3>
-            <div class="modal-actions">
-                <button class="btn btn-yes" id="btnYes">Ya</button>
-                <button class="btn btn-no" id="btnNo">Tidak</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal-overlay" id="tipModal">
-        <div class="tip-detail-box">
-            <span class="close-tip" id="closeTip">&times;</span>
-            <div class="tip-illustration" id="tipImage"></div>
-            <div class="tip-content">
-                <h2 id="tipTitle">Judul Tips</h2>
-                <p id="tipDesc">Deskripsi lengkap tips...</p>
-            </div>
+            <h3 style="margin-bottom: 25px; font-family: var(--font-heading); font-size: 1.8rem; font-weight: 700;">Hubungi Tenaga Ahli</h3>
+            <p style="color: var(--text-muted); margin-bottom: 45px; font-size: 1.05rem;">Konsultasikan kebutuhan teknik Anda, kami akan merespons dengan solusi profesional.</p>
+            <button class="btn-yes" id="btnYes">HUBUNGI WHATSAPP</button>
+            <p id="btnNo" style="margin-top: 30px; cursor: pointer; font-size: 0.8rem; color: #555; letter-spacing: 1px;">Mungkin di lain waktu</p>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2025 Sekawan Teknik. Developer <span>@arie96s</span></p>
+        <div class="footer-address">
+            <p>📍 Jl. Damai, No. 16 E, Panam, Kota Pekanbaru, Riau</p>
+            <p>📞 +62 812-6755-2283</p>
+        </div>
+        <p style="font-size: 0.75rem; color: #444; letter-spacing: 2px;">&copy; 2025 SEKAWAN TEKNIK. ENGINEERED EXCELLENCE.</p>
     </footer>
 
     <script>
         // Data Tips
         const tipsDatabase = [
-            { icon: "❄️", title: "Efisiensi AC Maksimal", desc: "Filter AC yang kotor dapat meningkatkan konsumsi listrik hingga 15%." },
-            { icon: "⚡", title: "Bahaya Kabel Extension", desc: "Jangan menyambung kabel secara berantai untuk menghindari panas berlebih." },
-            { icon: "🛁", title: "Mesin Cuci Bebas Jamur", desc: "Biarkan pintu terbuka setelah mencuci agar tidak apek." },
-            { icon: "📹", title: "Posisi CCTV Ideal", desc: "Hindari menghadap langsung sumber cahaya matahari." },
-            { icon: "💧", title: "Tanda Pipa Bocor", desc: "Pompa yang sering hidup-mati sendiri menandakan kebocoran halus." },
-            { icon: "🧊", title: "Kulkas Tidak Dingin?", desc: "Jangan menutup lubang ventilasi di dalam kulkas agar sirkulasi lancar." }
+            { icon: "❄️", title: "Efisiensi AC", p1: "Saringan AC yang bersih dapat menurunkan konsumsi listrik hingga 15% setiap bulan karena mesin tidak bekerja terlalu keras.", p2: "Pastikan Anda menjadwalkan pencucian rutin setiap 3 bulan sekali untuk menjaga tekanan freon tetap aman." },
+            { icon: "⚡", title: "Keamanan Listrik", p1: "Hindari menumpuk terlalu banyak steker pada satu stopkontak untuk mencegah panas berlebih yang memicu korsleting.", p2: "Gunakan kabel berstandar SNI untuk menjamin keamanan jangka panjang instalasi listrik rumah Anda." },
+            { icon: "📹", title: "Posisi CCTV", p1: "Tempatkan kamera di sudut yang membelakangi sinar matahari langsung agar kualitas gambar tetap tajam dan tidak silau.", p2: "Pembersihan lensa secara berkala sangat penting untuk memastikan deteksi wajah tetap akurat saat dibutuhkan." },
+            { icon: "🧺", title: "Perawatan Alat", p1: "Mesin cuci yang sering dibersihkan filternya akan memiliki umur motor 2 kali lebih lama dibanding yang dibiarkan kotor.", p2: "Jangan memaksakan beban pakaian melebihi kapasitas agar poros penggerak tidak cepat mengalami aus." },
+            { icon: "🚰", title: "Tangki Air", p1: "Kuras tangki air minimal setiap 6 bulan untuk mencegah penumpukan lumut dan bakteri yang berbahaya bagi kesehatan.", p2: "Pasanglah sistem pemutus arus otomatis (radar) untuk menghindari pemborosan listrik akibat air yang meluap." },
+            { icon: "🌬️", title: "Sirkulasi Udara", p1: "Penggunaan kipas exhaust di area dapur dan kamar mandi efektif mencegah kelembapan tinggi yang memicu tumbuhnya jamur.", p2: "Pastikan lubang ventilasi tidak tertutup barang agar pertukaran oksigen di dalam ruangan tetap terjaga maksimal." },
+            { icon: "🏠", title: "Rawat Plafon", p1: "Plafon gypsum sangat rentan terhadap air. Segera perbaiki kebocoran atap sekecil apapun sebelum plafon Anda ambruk.", p2: "Gunakan cat khusus plafon berkualitas tinggi agar warna tidak mudah menguning akibat hawa panas di atas atap." },
+            { icon: "💡", title: "Lampu Hemat", p1: "Beralih ke lampu LED tidak hanya menghemat biaya tagihan, tapi juga mengurangi beban panas ruangan sehingga AC lebih awet.", p2: "Gunakan sensor cahaya untuk lampu teras agar rumah tetap terang saat Anda bepergian tanpa membuang energi di siang hari." },
+            { icon: "🔌", title: "Sistem Grounding", p1: "Pastikan sistem pertanahan (grounding) terpasang dengan baik untuk membuang arus bocor ke bumi dan melindungi elektronik.", p2: "Cek berkala terminal tanah di panel utama terutama saat memasuki musim hujan untuk mencegah kerusakan akibat petir." },
+            { icon: "🛠️", title: "Pengecekan Rutin", p1: "Perawatan pencegahan (preventive maintenance) jauh lebih murah daripada biaya penggantian suku cadang saat alat sudah rusak total.", p2: "Buatlah catatan jadwal servis untuk setiap perangkat besar di rumah agar Anda tidak melewatkan waktu perawatan penting." }
         ];
 
-        // Header Scroll & Fade Logic
-        const header = document.getElementById('mainHeader');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
+        // Gallery Logic
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.gallery-slide');
+        function showSlide(n) {
+            slides.forEach(s => s.classList.remove('active'));
+            currentSlide = (n + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        function nextSlide() { showSlide(currentSlide + 1); }
+        function prevSlide() { showSlide(currentSlide - 1); }
+        setInterval(nextSlide, 6000);
 
         // Tips Logic
-        function renderRandomTips() {
+        let currentPage = 1;
+        const tipsPerPage = 4;
+        function renderTips() {
             const grid = document.getElementById('tipsGrid');
-            grid.innerHTML = '';
-            const shuffled = tipsDatabase.sort(() => 0.5 - Math.random());
-            shuffled.slice(0, 4).forEach(tip => {
-                const card = document.createElement('div');
-                card.className = 'info-card';
-                card.innerHTML = `
-                    <div class="info-icon">${tip.icon}</div>
-                    <h3>${tip.title}</h3>
-                    <p>${tip.desc}</p>
-                    <div class="click-hint">Klik untuk baca selengkapnya</div>
-                `;
-                card.addEventListener('click', () => openTipModal(tip));
-                grid.appendChild(card);
+            const pagin = document.getElementById('tipPagination');
+            grid.innerHTML = ""; pagin.innerHTML = "";
+            const start = (currentPage - 1) * tipsPerPage;
+            const paginated = tipsDatabase.slice(start, start + tipsPerPage);
+
+            paginated.forEach((tip, i) => {
+                grid.innerHTML += `
+                    <div class="info-card" onclick="openTipModal(${start + i})">
+                        <span class="info-icon">${tip.icon}</span>
+                        <h3 style="font-family:var(--font-heading); font-size:1.1rem; margin-bottom:18px;">${tip.title}</h3>
+                        <p style="font-size:0.9rem; color:var(--text-muted); line-height:1.6;">${tip.p1.substring(0, 80)}...</p>
+                    </div>`;
             });
+
+            for (let i = 1; i <= Math.ceil(tipsDatabase.length/tipsPerPage); i++) {
+                pagin.innerHTML += `<div class="page-box ${i===currentPage?'active':''}" onclick="changePage(${i})">${i}</div>`;
+            }
         }
 
-        // Sidebar & Modal Logic
-        const sidebar = document.getElementById('sidebar');
-        const menuToggle = document.getElementById('menuToggle');
-        const closeSidebar = document.getElementById('closeSidebar');
-        const bookingModal = document.getElementById('bookingModal');
-        const tipModal = document.getElementById('tipModal');
-        const closeTip = document.getElementById('closeTip');
-        let selectedService = "";
-
-        menuToggle.addEventListener('click', () => sidebar.classList.add('active'));
-        closeSidebar.addEventListener('click', () => sidebar.classList.remove('active'));
-
-        function triggerBooking(service) {
-            selectedService = service;
-            sidebar.classList.remove('active');
-            bookingModal.classList.add('active');
+        function changePage(p) { currentPage = p; renderTips(); }
+        function openTipModal(idx) {
+            const t = tipsDatabase[idx];
+            document.getElementById('tipPopIcon').innerText = t.icon;
+            document.getElementById('tipPopTitle').innerText = t.title;
+            document.getElementById('tipPopDesc').innerHTML = `<p style="margin-bottom:20px;">${t.p1}</p><p>${t.p2}</p>`;
+            document.getElementById('tipModal').classList.add('active');
         }
+        function closeTipModal() { document.getElementById('tipModal').classList.remove('active'); }
 
-        document.getElementById('btnYes').addEventListener('click', () => {
-            const phone = "6281267552283";
-            const msg = `Saya ingin Menyewa Jasa ${selectedService}`;
-            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
-            bookingModal.classList.remove('active');
+        // Interactions
+        window.addEventListener('scroll', () => {
+            const h = document.getElementById('mainHeader');
+            window.scrollY > 60 ? h.classList.add('scrolled') : h.classList.remove('scrolled');
         });
 
-        document.getElementById('btnNo').addEventListener('click', () => bookingModal.classList.remove('active'));
+        const sb = document.getElementById('sidebar');
+        document.getElementById('menuToggle').onclick = () => sb.classList.add('active');
+        document.getElementById('closeSidebar').onclick = () => sb.classList.remove('active');
 
-        function openTipModal(tipData) {
-            document.getElementById('tipTitle').textContent = tipData.title;
-            document.getElementById('tipDesc').textContent = tipData.desc;
-            document.getElementById('tipImage').textContent = tipData.icon;
-            tipModal.classList.add('active');
+        let service = "";
+        function triggerBooking(s) {
+            service = s; sb.classList.remove('active');
+            document.getElementById('bookingModal').classList.add('active');
         }
+        document.getElementById('btnYes').onclick = () => {
+            const msg = `Halo Sekawan Teknik, saya membutuhkan Pelayanan untuk: ${service}.`;
+            window.open(`https://wa.me/6281267552283?text=${encodeURIComponent(msg)}`);
+        };
+        document.getElementById('btnNo').onclick = () => document.getElementById('bookingModal').classList.remove('active');
 
-        closeTip.addEventListener('click', () => tipModal.classList.remove('active'));
-
-        window.addEventListener('click', (e) => {
-            if (e.target === bookingModal) bookingModal.classList.remove('active');
-            if (e.target === tipModal) tipModal.classList.remove('active');
-        });
-
-        window.onload = renderRandomTips;
+        window.onload = renderTips;
     </script>
 </body>
 </html>
